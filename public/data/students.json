@@ -1,0 +1,148 @@
+{
+  "class": "10-A",
+  "academicYear": "2025-2026",
+  "classTeacher": "Mrs. Lakshmi Reddy",
+  "totalStudents": 30,
+  "students": [
+    {
+      "id": 1,
+      "rollNumber": "10A001",
+      "name": "Aarav Sharma",
+      "attendance": 92,
+      "subjects": {
+        "Mathematics": 88,
+        "Science": 91,
+        "English": 76,
+        "Telugu": 83,
+        "Social Studies": 79,
+        "Computer Science": 95
+      }
+    },
+    {
+      "id": 2,
+      "rollNumber": "10A002",
+      "name": "Bhavana Reddy",
+      "attendance": 97,
+      "subjects": {
+        "Mathematics": 95,
+        "Science": 93,
+        "English": 89,
+        "Telugu": 91,
+        "Social Studies": 88,
+        "Computer Science": 97
+      }
+    },
+    {
+      "id": 3,
+      "rollNumber": "10A003",
+      "name": "Charan Kumar",
+      "attendance": 78,
+      "subjects": {
+        "Mathematics": 62,
+        "Science": 70,
+        "English": 65,
+        "Telugu": 72,
+        "Social Studies": 68,
+        "Computer Science": 74
+      }
+    },
+    {
+      "id": 4,
+      "rollNumber": "10A004",
+      "name": "Divya Patel",
+      "attendance": 88,
+      "subjects": {
+        "Mathematics": 79,
+        "Science": 84,
+        "English": 91,
+        "Telugu": 77,
+        "Social Studies": 85,
+        "Computer Science": 82
+      }
+    },
+    {
+      "id": 5,
+      "rollNumber": "10A005",
+      "name": "Eswar Rao",
+      "attendance": 65,
+      "subjects": {
+        "Mathematics": 55,
+        "Science": 61,
+        "English": 58,
+        "Telugu": 63,
+        "Social Studies": 60,
+        "Computer Science": 67
+      }
+    },
+    {
+      "id": 6,
+      "rollNumber": "10A006",
+      "name": "Farida Begum",
+      "attendance": 94,
+      "subjects": {
+        "Mathematics": 86,
+        "Science": 88,
+        "English": 94,
+        "Telugu": 80,
+        "Social Studies": 90,
+        "Computer Science": 85
+      }
+    },
+    {
+      "id": 7,
+      "rollNumber": "10A007",
+      "name": "Ganesh Murthy",
+      "attendance": 83,
+      "subjects": {
+        "Mathematics": 73,
+        "Science": 77,
+        "English": 69,
+        "Telugu": 75,
+        "Social Studies": 71,
+        "Computer Science": 80
+      }
+    },
+    {
+      "id": 8,
+      "rollNumber": "10A008",
+      "name": "Harini Nair",
+      "attendance": 99,
+      "subjects": {
+        "Mathematics": 98,
+        "Science": 96,
+        "English": 97,
+        "Telugu": 94,
+        "Social Studies": 95,
+        "Computer Science": 99
+      }
+    },
+    {
+      "id": 9,
+      "rollNumber": "10A009",
+      "name": "Ishaan Verma",
+      "attendance": 71,
+      "subjects": {
+        "Mathematics": 64,
+        "Science": 68,
+        "English": 72,
+        "Telugu": 66,
+        "Social Studies": 70,
+        "Computer Science": 63
+      }
+    },
+    {
+      "id": 10,
+      "rollNumber": "10A010",
+      "name": "Jyothi Srinivas",
+      "attendance": 90,
+      "subjects": {
+        "Mathematics": 82,
+        "Science": 87,
+        "English": 85,
+        "Telugu": 88,
+        "Social Studies": 83,
+        "Computer Science": 90
+      }
+    }
+  ]
+}
