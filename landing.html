@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Dashboard — Project Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0A0F1E;
+      --navy2:  #111827;
+      --navy3:  #1E2A3B;
+      --blue:   #2563EB;
+      --sky:    #38BDF8;
+      --white:  #F8FAFC;
+      --muted:  #94A3B8;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+      color: var(--white);
+    }
+
+    .nav-logo span { color: var(--sky); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 7px;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .nav-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle grid background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
+    }
+
+    /* glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(40px, 7vw, 76px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      color: var(--white);
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero-title .accent { color: var(--sky); }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 0 0 rgba(37,99,235,0);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+    }
+
+    .btn-ghost {
+      color: var(--muted);
+      padding: 13px 24px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    /* ── LIVE STATS STRIP ── */
+    .stats-strip {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin: 0 auto;
+      max-width: 700px;
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      margin-top: 64px;
+    }
+
+    .stat-block {
+      flex: 1;
+      padding: 24px 28px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-block:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--sky);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-desc {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 100px 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--white);
+      max-width: 480px;
+      line-height: 1.15;
+      margin-bottom: 56px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(56,189,248,0.25);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(37,99,235,0.12);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .feature-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PREVIEW MOCKUP ── */
+    .preview-section {
+      padding: 0 48px 100px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .mockup-frame {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .mockup-bar {
+      background: var(--navy3);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+
+    .mockup-url {
+      flex: 1;
+      background: var(--navy);
+      border-radius: 5px;
+      padding: 5px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: 8px;
+      font-family: monospace;
+    }
+
+    .mockup-body { padding: 24px; }
+
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mock-title-label {
+      font-size: 10px;
+      color: var(--sky);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .mock-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .mock-stat-pill {
+      text-align: right;
+    }
+
+    .mock-stat-pill .big { font-size: 24px; font-weight: 700; font-family: 'DM Sans'; color: var(--white); }
+    .mock-stat-pill .small { font-size: 10px; color: var(--muted); }
+
+    .mock-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .mock-stat {
+      background: var(--navy3);
+      padding: 14px;
+    }
+
+    .mock-stat-val { font-size: 18px; font-weight: 700; font-family: 'DM Sans'; color: var(--white); }
+    .mock-stat-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+    .mock-table { width: 100%; border-collapse: collapse; }
+
+    .mock-table th {
+      text-align: left;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mock-table td {
+      padding: 10px 10px;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: #CBD5E1;
+    }
+
+    .mock-table tr:last-child td { border-bottom: none; }
+
+    .mock-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .mb-blue  { background: rgba(37,99,235,0.2);  color: #60A5FA; }
+    .mb-green { background: rgba(22,163,74,0.2);  color: #4ADE80; }
+    .mb-amber { background: rgba(217,119,6,0.2);  color: #FCD34D; }
+    .mb-red   { background: rgba(220,38,38,0.2);  color: #F87171; }
+
+    /* ── TECH STACK ── */
+    .tech-section {
+      padding: 0 48px 100px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .tech-pill {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tech-pill:hover { border-color: rgba(56,189,248,0.3); color: var(--white); }
+    .tech-pill .dot2 { width: 6px; height: 6px; border-radius: 50%; background: var(--sky); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 80px 48px 120px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p { font-size: 12px; color: var(--muted); }
+    footer a { color: var(--sky); text-decoration: none; font-size: 12px; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.35s; }
+    .delay-4 { animation-delay: 0.5s; }
+    .delay-5 { animation-delay: 0.65s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .features, .preview-section, .tech-section, .cta-section { padding-left: 20px; padding-right: 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .stats-strip { flex-direction: column; }
+      .stat-block { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-block:last-child { border-bottom: none; }
+      .mock-stats { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">School<span>Dashboard</span></span>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#preview">Preview</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="./index.html" class="nav-cta">Open Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow fade-up delay-1">Student Performance Analytics</p>
+    <h1 class="hero-title fade-up delay-2">
+      Track every student.<br><span class="accent">At a glance.</span>
+    </h1>
+    <p class="hero-desc fade-up delay-3">
+      A class-level dashboard that surfaces attendance, subject marks, and performance grades for every student in real time.
+    </p>
+    <div class="hero-actions fade-up delay-4">
+      <a href="./index.html" class="btn-primary">Open Dashboard →</a>
+      <a href="https://github.com/SriCharan224/School_Dashboard" target="_blank" class="btn-ghost">View on GitHub</a>
+    </div>
+
+    <div class="stats-strip fade-up delay-5">
+      <div class="stat-block">
+        <span class="stat-num" data-target="10">0</span>
+        <span class="stat-desc">Students tracked</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num" data-target="6">0</span>
+        <span class="stat-desc">Subjects per student</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num" data-target="84" data-suffix="%">0%</span>
+        <span class="stat-desc">Class average</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <p class="section-label">What it does</p>
+    <h2 class="section-title">Built for teachers who need answers fast</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <p class="feature-name">Subject Performance Bars</p>
+        <p class="feature-desc">Color-coded bars show each student's marks per subject with instant grade indicators (A+ to D).</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <p class="feature-name">Search and Filter</p>
+        <p class="feature-desc">Find any student by name or roll number. Filter the whole class by performance tier in one click.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚠️</div>
+        <p class="feature-name">Attention Flags</p>
+        <p class="feature-desc">Students below 60% average or with low attendance are automatically flagged so nothing slips through.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <p class="feature-name">Student Detail View</p>
+        <p class="feature-desc">Click any row to open a full breakdown: attendance status, subject-by-subject bars, and overall average.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <p class="feature-name">JSON Data Source</p>
+        <p class="feature-desc">Data loads from a structured JSON file. Update one file to reflect any changes to the class roster.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <p class="feature-name">Responsive Layout</p>
+        <p class="feature-desc">Works cleanly on desktop and tablet. The table and modal adapt to the screen without breaking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOCKUP PREVIEW -->
+  <section class="preview-section" id="preview">
+    <p class="section-label">Preview</p>
+    <h2 class="section-title">Looks exactly like this</h2>
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="mockup-url">localhost:5173</div>
+      </div>
+      <div class="mockup-body">
+        <div class="mock-header">
+          <div>
+            <p class="mock-title-label">Class Dashboard</p>
+            <p class="mock-title">Class 10-A</p>
+          </div>
+          <div class="mock-stat-pill">
+            <p class="big">30</p>
+            <p class="small">TOTAL STUDENTS</p>
+          </div>
+        </div>
+        <div class="mock-stats">
+          <div class="mock-stat">
+            <div class="mock-stat-val">84</div>
+            <div class="mock-stat-lbl">Class Average</div>
+          </div>
+          <div class="mock-stat">
+            <div class="mock-stat-val">7</div>
+            <div class="mock-stat-lbl">Above 90% Attendance</div>
+          </div>
+          <div class="mock-stat" style="color: #F87171">
+            <div class="mock-stat-val" style="color:#F87171">2</div>
+            <div class="mock-stat-lbl">Need Attention</div>
+          </div>
+          <div class="mock-stat">
+            <div class="mock-stat-val">10</div>
+            <div class="mock-stat-lbl">Showing</div>
+          </div>
+        </div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th>Roll No.</th>
+              <th>Student Name</th>
+              <th>Attendance</th>
+              <th>Avg. Marks</th>
+              <th>Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--muted)">10A001</td>
+              <td>Aarav Sharma</td>
+              <td style="color:#4ADE80">92%</td>
+              <td>85/100</td>
+              <td><span class="mock-badge mb-green">Good</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--muted)">10A002</td>
+              <td>Bhavana Reddy</td>
+              <td style="color:#4ADE80">97%</td>
+              <td>94/100</td>
+              <td><span class="mock-badge mb-blue">Excellent</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--muted)">10A003</td>
+              <td>Charan Kumar</td>
+              <td style="color:#FCD34D">78%</td>
+              <td>67/100</td>
+              <td><span class="mock-badge mb-amber">Average</span></td>
+            </tr>
+            <tr>
+              <td style="color:var(--muted)">10A005</td>
+              <td>Eswar Rao</td>
+              <td style="color:#F87171">65%</td>
+              <td>61/100</td>
+              <td><span class="mock-badge mb-red">Needs Attention</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="tech-section" id="stack">
+    <p class="section-label">Tech stack</p>
+    <h2 class="section-title">Built with</h2>
+    <div class="tech-grid">
+      <div class="tech-pill"><span class="dot2"></span>React 19</div>
+      <div class="tech-pill"><span class="dot2"></span>Vite 8</div>
+      <div class="tech-pill"><span class="dot2"></span>JavaScript (ES6+)</div>
+      <div class="tech-pill"><span class="dot2"></span>CSS (no framework)</div>
+      <div class="tech-pill"><span class="dot2"></span>JSON data source</div>
+      <div class="tech-pill"><span class="dot2"></span>Inter + DM Sans</div>
+      <div class="tech-pill"><span class="dot2"></span>GitHub</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to explore the dashboard?</h2>
+    <p class="cta-desc">Open the live app or browse the source code on GitHub.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="./index.html" class="btn-primary">Open Dashboard →</a>
+      <a href="https://github.com/SriCharan224/School_Dashboard" target="_blank" class="btn-ghost">GitHub Repo</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built by Sri Charan Gandluri &nbsp;·&nbsp; B.Tech CSE, Anurag University</p>
+    <a href="https://github.com/SriCharan224" target="_blank">github.com/SriCharan224</a>
+  </footer>
+
+  <!-- COUNT-UP ANIMATION -->
+  <script>
+    const counters = document.querySelectorAll('.stat-num[data-target]');
+
+    const countUp = (el) => {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1200;
+      const steps = 40;
+      const increment = target / steps;
+      let current = 0;
+      let step = 0;
+
+      const timer = setInterval(() => {
+        step++;
+        current = Math.min(Math.round(increment * step), target);
+        el.textContent = current + suffix;
+        if (step >= steps) clearInterval(timer);
+      }, duration / steps);
+    };
+
+    // Trigger when hero stats enter view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          counters.forEach(countUp);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const strip = document.querySelector('.stats-strip');
+    if (strip) observer.observe(strip);
+  </script>
+
+</body>
+</html>
